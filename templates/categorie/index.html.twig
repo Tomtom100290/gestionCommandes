@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ categories.Nom }}</h1>
+    <p>Cette catégorie contient {{ categories.productsFK|length }} produit(s)</p>
+
+    {% if categories.productsFK is not empty %}
+        <table border="1" cellpadding="8" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Prix</th>
+                    <th>Description</th>
+                    <!-- Ajoute d'autres colonnes si nécessaire -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for produit in categories.productsFK %}
+                    <tr>
+                        <td>{{ produit.Id }}</td>
+                        <td>{{ produit.Nom }}</td>
+                        <td>{{ produit.PrixHT }}</td>
+                        <td>{{ produit.Description|striptags }}</td>
+                        <td><img src="/Uploads/{{ produit.Illustration }}" alt="" class="img-fluid"></td>
+                        <!--Ci dessus, "|striptags" supprime les balises <div> qui s'affichaient dans le tableau -->                   
+                {% endfor %}
+            </tbody>
+        </table>
+                    {% for produit in categories.productsFK %}
+                    <div>
+                        <div><img src="/Uploads/{{ produit.Illustration }}" alt="" class="img-fluid"></div>
+                        <h2>{{ produit.Nom }}</h2>
+                        <span><strong>{{ produit.PrixHT }}</strong></span>
+                        <p>{{ produit.Description|striptags }}</p>
+                    </div>
+                    {% endfor %}
+    {% else %}
+        <p>Aucun produit dans cette catégorie.</p>
+    {% endif %}
+{% endblock %}

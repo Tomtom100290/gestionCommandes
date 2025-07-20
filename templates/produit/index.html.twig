@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProduitController!{% endblock %}
+
+{% block body %}
+<h1>{{ produits.Nom }}</h1>
+<span><strong>Prix: {{ produits.PrixHT }}</strong></span>
+<p>Description: {{ produits.Description|striptags }}</p>
+<div><img src="/Uploads/{{ produits.Illustration }}" alt="" class="img-fluid"></div>
+<!--Ci-dessus, la class "img-fluid" est utilisé pour garder les dimension de l'image -->
+
+<div class="card" style="width: 18rem;">
+  <div class="image"><img src="/Uploads/{{ produits.Illustration }}" class="card-img-top" alt="..."></div>
+  <div class="card-body">
+    <h5 class="card-title">{{ produits.Nom }}</h5>
+    <p class="card-text">{{ produits.Description|striptags }}</p>
+    <div><strong>Prix: {{ produits.PrixHT }}</strong></div>
+    <a href="{{ path('app_prepa_add', {id : produit.id} ) }}" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+
+{% endblock %}
